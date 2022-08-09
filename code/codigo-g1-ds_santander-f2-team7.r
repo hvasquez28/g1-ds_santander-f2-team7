@@ -6,6 +6,11 @@ library(ggplot2)
 # Descargalo del CRAN https://cran.r-project.org/src/contrib/Archive/fbRanks/fbRanks_2.0.tar.gz
 # Instala igraphs: install.packages("igraph")
 # install.packages(path_absoluta_del_archivo, repos = NULL, type = "source")
+# Otra opción de instalación:
+# install.packages("remotes")
+# library(remotes)
+# install_github("cran/fbRanks")
+
 
 # Colocar el directorio de trabajo según corresponda
 # setwd("C:/Users/User/Documents/Bedu/Sesion 8/post/")

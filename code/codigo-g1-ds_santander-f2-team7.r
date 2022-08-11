@@ -11,11 +11,8 @@ library(ggplot2)
 # library(remotes)
 # install_github("cran/fbRanks")
 
-
 # Colocar el directorio de trabajo según corresponda
 # setwd("C:/Users/User/Documents/Bedu/Sesion 8/post/")
-
-
 
 # Descarga de archivos
 # https://www.football-data.co.uk/spainm.php

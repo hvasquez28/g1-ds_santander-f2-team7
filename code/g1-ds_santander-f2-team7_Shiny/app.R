@@ -20,9 +20,10 @@ ui <-
         
         sidebarMenu(
           menuItem("Histograma", tabName = "Dashboard", icon = icon("dashboard")),
+          menuItem("PostWork 3", tabName = "img", icon = icon("file-picture-o")),
           menuItem("Dispersión", tabName = "graph", icon = icon("area-chart")),
-          menuItem("Data Table", tabName = "data_table", icon = icon("table")),
-          menuItem("Imágen", tabName = "img", icon = icon("file-picture-o"))
+          menuItem("Data Table", tabName = "data_table", icon = icon("table"))
+          
         )
         
       ),
@@ -50,6 +51,15 @@ ui <-
                   )
           ),
           
+          # Imagenes de Graficas del Postwork 3
+          tabItem(tabName = "img",
+                  fluidRow(
+                    titlePanel(h3("Imagenes de Graficas del Postwork 3")),
+                    img( src = "ProbConjunta.png", 
+                         height = 350, width = 350)
+                  )
+          ),
+          
           # Dispersión
           tabItem(tabName = "graph", 
                   fluidRow(
@@ -71,14 +81,6 @@ ui <-
                   fluidRow(        
                     titlePanel(h3("Data Table")),
                     dataTableOutput ("data_table")
-                  )
-          ), 
-          
-          tabItem(tabName = "img",
-                  fluidRow(
-                    titlePanel(h3("Imágen de calor para la correlación de las variables")),
-                    img( src = "cor_mtcars.png", 
-                         height = 350, width = 350)
                   )
           )
           

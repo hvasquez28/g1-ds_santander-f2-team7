@@ -6,13 +6,18 @@ library(ggplot2)
 # Descargalo del CRAN https://cran.r-project.org/src/contrib/Archive/fbRanks/fbRanks_2.0.tar.gz
 # Instala igraphs: install.packages("igraph")
 # install.packages(path_absoluta_del_archivo, repos = NULL, type = "source")
-# Otra opción de instalación:
+
+# Otra opción de instalación de fbRanks:
 # install.packages("remotes")
 # library(remotes)
 # install_github("cran/fbRanks")
 
 # Colocar el directorio de trabajo según corresponda
-# setwd("C:/Users/User/Documents/Bedu/Sesion 8/post/")
+# setwd("C:/Users/hvasq/OneDrive/CursoBeduDataScience/Phase2/R/Data/Proyecto")
+# Directorio de trabajo si se usa RStudio Cloud con el repositorio del proyecto
+setwd("/cloud/project/Data")
+
+
 
 # Descarga de archivos
 # https://www.football-data.co.uk/spainm.php

@@ -15,6 +15,7 @@ library(ggplot2)
 # Colocar el directorio de trabajo según corresponda
 # setwd("C:/Users/hvasq/OneDrive/CursoBeduDataScience/Phase2/R/Data/Proyecto")
 # Directorio de trabajo si se usa RStudio Cloud con el repositorio del proyecto
+
 setwd("/cloud/project/Data")
 
 

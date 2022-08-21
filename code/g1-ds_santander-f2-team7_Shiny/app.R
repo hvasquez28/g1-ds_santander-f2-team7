@@ -1,11 +1,12 @@
 ## app.R ##
 
-## Dashboard para el data set 'mtcars'
+## Dashboard de proyecto final de R del equipo 7
 
 library(shiny)
 library(shinydashboard)
 #install.packages("shinythemes")
 library(shinythemes)
+library(dplyr)
 
 #Esta parte es el análogo al ui.R
 ui <- 
@@ -15,19 +16,25 @@ ui <-
     dashboardPage(
       
       dashboardHeader(title = "Predicción de resultados", titleWidth = 300),
+      title = "Proyecto de R del Equipo 7",
+      skin = "green",
       
       dashboardSidebar(
         
         sidebarMenu(
-          menuItem("Gráficos de barras", tabName = "Goles", icon = icon("bar-chart")),
+          menuItem("Gráficos de barras", tabName = "Goles", icon = icon("chart-column")),
           menuItem("Goles local - visitante", tabName = "img", icon = icon("soccer-ball-o")),
           menuItem("Data Table", tabName = "data_table", icon = icon("table")),
-          menuItem("Factores de ganancia", tabName = "img2", icon = icon("file-picture-o"))  #icon("area-chart")
+          menuItem("Factores de ganancia", tabName = "img2", icon = icon("glyphicon glyphicon-stats", lib = "glyphicon")),
+          menuItem("Prueba de Hipotesis", tabName = "hip", icon = icon("glyphicon glyphicon-question-sign", lib = "glyphicon")) 
         )
         
       ),
       
       dashboardBody(
+        tags$head(
+          tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
+        ),
         
         tabItems(
           
@@ -91,14 +98,21 @@ ui <-
                     )
                     
                   )
+          ),
+          
+          #  Prueba de Hipotesis y algo nuevo que hicimos con los datos
+          tabItem(tabName = "hip",
+                  fluidRow(
+                    titlePanel(h3("Prueba de Hipotesis y ... ")),
+                   
+                    
+                  )
           )
-          
-          
         
-          
-        )
+ 
       )
     )
+  )
   )
 
 #De aquí en adelante es la parte que corresponde al server
@@ -106,9 +120,9 @@ ui <-
 server <- function(input, output) {
   library(ggplot2)
   
-  #Gráfico de Histograma
+  #gráficas de barras de 
   output$plot1 <- renderPlot({
-    
+   
     macthdataURL<-"https://raw.githubusercontent.com/beduExpert/Programacion-R-Santander-2021/main/Sesion-08/Postwork/match.data.csv"
     data <-  read.csv(macthdataURL, header = T)
     
@@ -128,14 +142,12 @@ server <- function(input, output) {
   
 
   #Data Table
-  
-  
-  macthdataURL<-"/cloud/project/Data/match.data.csv"
+  macthdataURL<-"https://raw.githubusercontent.com/beduExpert/Programacion-R-Santander-2021/main/Sesion-08/Postwork/match.data.csv"
   data <-  read.csv(macthdataURL, header = T)
   
   output$data_table <- renderDataTable( {data}, 
-                                        options = list(aLengthMenu =  c(10,20,25,40,50),
-                                                       iDisplayLength = 10)
+                                        options = list(lengthMenu =  c(10,20,25,40,50),
+                                                       pageLength = 10)
   )
   
 }

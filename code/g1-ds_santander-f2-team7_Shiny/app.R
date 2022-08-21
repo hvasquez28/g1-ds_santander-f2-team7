@@ -43,7 +43,7 @@ ui <-
                   fluidRow(
                     titlePanel("Goles a favor y en contra por equipo"), 
                     selectInput("x", "Seleccione el valor de X",
-                                choices = c("home.score", "away.score")),
+                                choices = c("Local" = "home.score", "Visitante" = "away.score")),
                     
                     
                     plotOutput("plot1", height = 450, width = 750)
@@ -134,7 +134,7 @@ server <- function(input, output) {
     data %>% ggplot(aes(x, fill = FTR)) + 
       geom_bar() + 
       facet_wrap("away.team") +
-      labs(x =input$x, y = "Goles") + 
+      labs(x =  ifelse(input$x == "home.score", "Local", "Visitante"), y = "Goles") + 
       ylim(0,50)
     
     

@@ -136,8 +136,8 @@ server <- function(input, output) {
     x <- data[,input$x]
     
     
-    data %>% ggplot(aes(x, fill = FTR)) + 
-      geom_bar() + 
+    data %>% ggplot(aes(x, fill = FTR)) + # se hace un pipeline para data con el operador %>%
+      geom_bar() + #Gráfica de barras
       facet_wrap("away.team") + #se establecen niveles de colores de acuerdo a away.team
       labs(x =  ifelse(input$x == "home.score", "Local", "Visitante"), y = "Goles") + 
       ylim(0,50)

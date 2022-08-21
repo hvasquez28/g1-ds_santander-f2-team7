@@ -1,3 +1,5 @@
+install.packages("ggplot2")
+install.packages("dplyr")
 
 library(fbRanks)
 library(dplyr)
@@ -220,13 +222,16 @@ for(j in 1:length(phs)){
 # Escenario con momios máximos
 
 g <- data.frame(Num_Ap = 1:length(g), Capital = g)
-p <- ggplot(g, aes(x=Num_Ap, y=Capital)) + geom_line( color="purple") + geom_point() +
-  labs(x = "Número de juego", 
+p <- ggplot(g, aes(x=Num_Ap, y=Capital)) + # se modifica el color y ancho de la linea 
+  geom_line(color="light blue",lwd = 2) + # se modifica el color y el ancho de los puntos
+  geom_point(color="red",lwd=1) +
+  labs(x= "Número de juego",
        y = "Capital",
-       title = "Realizando una secuencia de juegos") +
+       title = "Realizando una secuencia de juegos con momios máximos") +
+  theme_gray()+ # se establece el tema de líneas blancas con fondo gris
   theme(plot.title = element_text(size=12))  +
   theme(axis.text.x = element_text(face = "bold", color="blue" , size = 10, angle = 25, hjust = 1),
-        axis.text.y = element_text(face = "bold", color="blue" , size = 10, angle = 25, hjust = 1))  # color, ángulo y estilo de las abcisas y ordenadas 
+        axis.text.y = element_text(face = "bold", color="blue" , size = 10, angle = 25, hjust = 1))  # color, ángulo y estilo de las abcisas y ordenadas  
 p
 
 # Escenario con momios promedio
@@ -248,10 +253,13 @@ for(j in 1:length(phs)){
 }
 
 g <- data.frame(Num_Ap = 1:length(g), Capital = g)
-p <- ggplot(g, aes(x=Num_Ap, y=Capital)) + geom_line( color="purple") + geom_point() +
+p <- ggplot(g, aes(x=Num_Ap, y=Capital)) + 
+  geom_line(color="black",lwd = 2) + # se modifica el color y ancho de la linea 
+  geom_point(color="green",lwd=1) + # se modifica el color y el ancho de los puntos
   labs(x = "Número de juego", 
        y = "Capital",
-       title = "Realizando una secuencia de juegos") +
+       title = "Realizando una secuencia de juegos con momios promedio") +
+  theme_bw()+ # se establece el tema de lineas negras con fondo claro
   theme(plot.title = element_text(size=12))  +
   theme(axis.text.x = element_text(face = "bold", color="blue" , size = 10, angle = 25, hjust = 1),
         axis.text.y = element_text(face = "bold", color="blue" , size = 10, angle = 25, hjust = 1))  # color, ángulo y estilo de las abcisas y ordenadas 

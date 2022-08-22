@@ -31,7 +31,8 @@ ui <-
           menuItem("Goles local - visitante", tabName = "img", icon = icon("soccer-ball-o")),
           menuItem("Data Table", tabName = "data_table", icon = icon("table")),
           menuItem("Factores de ganancia", tabName = "img2", icon = icon("glyphicon glyphicon-stats", lib = "glyphicon")),
-          menuItem("Prueba de Hipotesis", tabName = "hip", icon = icon("glyphicon glyphicon-question-sign", lib = "glyphicon")) 
+          menuItem("Hallazgos por Clustering", tabName = "clus", icon = icon("glyphicon glyphicon-question-sign", lib = "glyphicon")),
+          menuItem("Hallazgos adicionales", tabName = "adi", icon = icon("glyphicon glyphicon-question-sign", lib = "glyphicon")) 
         )
         
       ),
@@ -105,15 +106,117 @@ ui <-
                   )
           ),
           
-          #  Prueba de Hipotesis y algo nuevo que hicimos con los datos
-          tabItem(tabName = "hip",
+          #  Prueba de contraste de Hipotesis
+          tabItem(tabName = "clus",
                   fluidRow(
-                    titlePanel(h3("Prueba de Hipotesis y ... ")),
-                   
+                    titlePanel(h2("Hallazgos adicionales usando algoritmos de Clustering")),
+                    titlePanel(h3("Graficos para determinar la cantidad de clusters a usar")),
+                    img( src = "DetClusterWineers.jpg", 
+                         height = 350, width = 450),
+                    p("Determinante de clusters de equipos ganadores"),
+                    p(" "),
+                    img( src = "DetClusterLosers.jpg", 
+                         height = 350, width = 450),
+                    p("Determinante de clusters de equipos perdedores"),
+                    titlePanel(h4("En base a las gráficas anteriores se toma la decisión de hacerlo con 6 clusters")),
+                    titlePanel(h4("En las siguientes gráficas se usa este numero de clusters.")),
+                    
+                    p("Los clusters van difiriendo en cada una de las siguientes gráficas"), 
+                    p("La linea azul presente en el grafico, es el rendimiento general de todos los equipos."), 
+                    p("La roja indica que tan bien/mal lo hace un grupo."),
+                    p("Si la lineas rojas se salen del circulo azul, esto quiere decir que los equipos conformados por el cluster, lo hacen mejor que el promedio"),
+                    p("Mientras que aquellas que se mantienen dentro del promedio(circulo azul), presentan un menor rendimiento "),
+                    img( src = "ClusterLosersKmeans.jpg", 
+                         height = 350, width = 450),
+                    p("Caracteristicas de los equipos perdedores"),
+                    img( src = "ClusterWineersKmeans.jpg", 
+                         height = 350, width = 450),
+                    p("Caracteristicas de los equipos Ganadores"),
+                    img( src = "ClusterJeraquicoLosers.jpg", 
+                         height = 350, width = 450),
+                    p("Cluster Jerarquico de equipos Perdedores"),
+                    img( src = "ClusterJeraquicoWinners.jpg", 
+                         height = 350, width = 450),
+                    p("Cluster Jerarquico de equipos Ganadores"),
+                 
+                    titlePanel(h4("Se unen los datos para determinar a los mejores equipos.")),
+                    img( src = "DetClusterCombinado.jpg", 
+                         height = 350, width = 450),
+                    p("Determinante de Clusters de equipos combinados"),
+                    p("Con 6 clusters se observa que los clusters mas explosivos estan conformados por 
+                    el numero 6 y el numero 3, donde p (perdidos) es menor al promedio,
+                    g(ganados) es mayor al promedio asi como win rate."),
+                    
+                    
+                    img( src = "AnalisisClusterConjunto.jpg", 
+                         height = 350, width = 450),
+                    p("Caracteristicas Determinantes de ambos equipos"),
+                    img( src = "ClusterJeraquicoCombinado.jpg", 
+                         height = 350, width = 450),
+                    p("Cluster Jerarquico de equipos Combinados"),
+                    p("De estos graficos se observa que tanto el Barcelona como el Real Madrid 
+                    son los que presentan diferencias más remarcadas."),
+                    titlePanel(h4("En base a este análisis se puede determinar, 
+                    quienes pueden ganar el campeonato la siguiente temporada."))
                     
                   )
-          )
+          ),
         
+          #  Hallazgos adicionales que hicimos con los datos
+          tabItem(tabName = "adi",
+                  fluidRow(
+                    titlePanel(h3("Hallazgos y gráficas adicionales")),
+                    p("Se toma la decision de crear un modelo de regresion logistica basado en la diferencia de goles 
+                      necesaria para que un equipo como local gane. (El complemento es la probabilidad de que el equipo
+                      gane como visitante)"),
+                    p("Se toman en cuenta los empates, y posteriormente, se eliminan aquellos partidos 
+                      para obtener un mejor modelo. "),
+                    img( src = "RegLogisticaConEmpates.jpg", 
+                         height = 350, width = 450),
+                    p("Gráfica de Regresión Logistica Con Empates"),
+                    img( src = "RegLogisticaSinEmpates.jpg", 
+                         height = 350, width = 450),
+                    p("Gráfica de Regresión Logistica Sin Empates"),
+                    p("El modelo mejora considerablemente cuando eliminamos los empates."),
+                    p("AIC 3775  #Sin Empates"),
+                    p("NULL 3809"),
+                    p("Res 3771"),
+                    p("AIC 4547  #Con Empates"),
+                    p("Null 5259"),
+                    p("Res  4543"),
+                    
+                    titlePanel(h4("Gráficas de Momios resultantes")),
+                    img( src = "NuevoMomiosMax.jpg", 
+                         height = 350, width = 450),
+                    p("Gráfica de Momios Máximos"),
+                    img( src = "NuevoMomiosProm.jpg", 
+                         height = 350, width = 450),
+                    p("Gráfica de Momios Promedios"),
+                    
+                    
+                    p("Al graficar las proporciones es claro observar que las probabilidad aumentan
+    de forma considerable en todos los niveles, es decir, cuando la probabilidad
+    de ganar con 1 gol, 2 y 3 de ventaja. 
+    Dadas las limitaciones del ordenador, el mejor modelo al que se ha llegado
+    Es cuando tomamos el 24%-26% de fechas unicas."), 
+     
+    p("H.o. prop. de ganar con 2.5 goles de ventaja con 325 fechas unicas es 
+    menor o igual que con 170"),
+    
+    p("H.A. Prop de ganar con 2.5 goles de ventaja con 325 fechas unicas es mayor que con 
+    170 unicas."),
+    
+    p("Probabilidades Condicionales Estimadas"),
+    p("#.661 > 2.5  #325"),
+    p("#.594 < 2.5  #325"),
+    
+    p("#.64  > 2.5 #170"),
+    p("#.58  < 2.5 #170 "),
+    
+    p("hist(as + hs) #El histograma muestra que hay mas partidos(reales) con mas de 4 goles"),
+    p("hist(pas + phs)#Que partidos predecidos (con mas de 4 goles).")
+                  )
+          )
  
       )
     )

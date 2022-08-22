@@ -100,6 +100,8 @@ data <- select(data, date, home.team, home.score, away.team, away.score:Avg.2.5.
 rm(lista_numeros); rm(lista_urls_datasets); rm(lista_dataframes); rm(lista_dataframes_s); rm(df_1_9); rm(df_10)
 # Data frames de partidos y equipos
 
+setwd("/cloud/project/Data/MatchData")
+
 md <- data %>% select(date:away.score)
 write.csv(md, "match.data.csv", row.names = FALSE)
 df <- create.fbRanks.dataframes(scores.file = "match.data.csv")
